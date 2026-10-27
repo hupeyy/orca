@@ -2,8 +2,9 @@ import type React from 'react'
 import type { GlobalSettings } from '../../../../shared/global-settings-types'
 import { OpenInMenuSetting } from './OpenInMenuSetting'
 import { SearchableSetting } from './SearchableSetting'
-import { SettingsSubsectionHeader, SettingsSwitchRow } from './SettingsFormControls'
+import { SettingsRow, SettingsSubsectionHeader, SettingsSwitchRow } from './SettingsFormControls'
 import { WorkspaceDirectorySetting } from './WorkspaceDirectorySetting'
+import { NewWorkspaceDefaultProjectSetting } from './NewWorkspaceDefaultProjectSetting'
 import { translate } from '@/i18n/i18n'
 import { GlobalWorktreeVisibilitySourcesSetting } from './GlobalWorktreeVisibilitySourcesSetting'
 import { GLOBAL_WORKTREE_VISIBILITY_SETTINGS_TARGET_ID } from '@/lib/settings-navigation-types'
@@ -37,6 +38,37 @@ export function GeneralWorkspaceSettingsSection({
       />
 
       <WorkspaceDirectorySetting settings={settings} updateSettings={updateSettings} />
+
+      <SearchableSetting
+        title={translate(
+          'auto.components.settings.NewWorkspaceDefaultProjectSetting.title',
+          'Default Project'
+        )}
+        description={translate(
+          'auto.components.settings.NewWorkspaceDefaultProjectSetting.description',
+          'Project or folder the new workspace dialog starts on when you open it outside a project.'
+        )}
+        keywords={['default', 'project', 'folder', 'new workspace']}
+      >
+        <SettingsRow
+          labelId="general-new-workspace-default-project-label"
+          label={translate(
+            'auto.components.settings.NewWorkspaceDefaultProjectSetting.title',
+            'Default Project'
+          )}
+          description={translate(
+            'auto.components.settings.NewWorkspaceDefaultProjectSetting.description',
+            'Project or folder the new workspace dialog starts on when you open it outside a project.'
+          )}
+          control={
+            <NewWorkspaceDefaultProjectSetting
+              settings={settings}
+              updateSettings={updateSettings}
+              labelId="general-new-workspace-default-project-label"
+            />
+          }
+        />
+      </SearchableSetting>
 
       <div
         id={GLOBAL_WORKTREE_VISIBILITY_SETTINGS_TARGET_ID}

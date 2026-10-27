@@ -32,6 +32,7 @@ export function useComposerTargetState(
     projects: composerTargetStore.projects,
     repoIdOverride: composerTargetStore.repoIdOverride,
     seedActiveRepoId: composerTargetStore.seedActiveRepoId,
+    settings: composerTargetStore.settings,
     workspaceHostScope: composerTargetStore.workspaceHostScope,
     workspaceStatuses: composerTargetStore.workspaceStatuses
   })

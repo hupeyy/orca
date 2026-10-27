@@ -55,6 +55,19 @@ export const getGeneralWorkspaceSearchEntries = createLocalizedCatalog(() => [
     ]
   },
   {
+    title: translate('auto.components.settings.NewWorkspaceDefaultProjectSetting.title', 'Default Project'),
+    description: translate(
+      'auto.components.settings.NewWorkspaceDefaultProjectSetting.description',
+      'Project or folder the new workspace dialog starts on when you open it outside a project.'
+    ),
+    keywords: [
+      ...translateSearchKeyword('auto.components.settings.NewWorkspaceDefaultProjectSetting.keywordDefault', 'default'),
+      ...translateSearchKeyword('auto.components.settings.NewWorkspaceDefaultProjectSetting.keywordProject', 'project'),
+      ...translateSearchKeyword('auto.components.settings.NewWorkspaceDefaultProjectSetting.keywordFolder', 'folder'),
+      ...translateSearchKeyword('auto.components.settings.NewWorkspaceDefaultProjectSetting.keywordNewWorkspace', 'new workspace')
+    ]
+  },
+  {
     title: translate(
       'auto.components.settings.general.search.913242091d',
       'Ask Before Deleting Workspaces'

@@ -41,6 +41,7 @@ function createInput(repos: Repo[]): Parameters<typeof useComposerInitialTargetS
     projects: projection.projects,
     repoIdOverride: undefined,
     seedActiveRepoId: 'current',
+    settings: null,
     workspaceHostScope: 'all',
     workspaceStatuses: []
   }

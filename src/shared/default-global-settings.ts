@@ -32,6 +32,7 @@ export function buildDefaultSettings(args: {
     workspaceDir: args.workspaceDir,
     worktreeVisibilityDefaults: { external: 'hide' },
     nestWorkspaces: true,
+    newWorkspaceDefaultProject: null,
     workspaceDirHistory: [],
     refreshLocalBaseRefOnWorktreeCreate: false,
     localBaseRefSuggestionDismissed: false,

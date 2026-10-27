@@ -18,6 +18,7 @@ type ComposerInitialTargetStateInput = Pick<
   | 'projects'
   | 'repoIdOverride'
   | 'seedActiveRepoId'
+  | 'settings'
   | 'workspaceHostScope'
   | 'workspaceStatuses'
 >
@@ -26,6 +27,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { isWorkspaceStatusId } from '../../../../shared/workspace-statuses'
 import { resolveWorkspaceCreationTarget } from '@/lib/project-host-workspace-target'
 import { findActionableFolderProjectGroup } from '@/lib/new-workspace-project-options'
+import { resolveNewWorkspaceDefaultProjectSeed } from '@/lib/new-workspace-default-project'
 import type { ProjectGroup } from '../../../../shared/project-group-types'
 
 export function useComposerInitialTargetState(input: ComposerInitialTargetStateInput) {
@@ -45,6 +47,7 @@ export function useComposerInitialTargetState(input: ComposerInitialTargetStateI
     projects,
     repoIdOverride,
     seedActiveRepoId,
+    settings,
     workspaceHostScope,
     workspaceStatuses
   } = input
@@ -70,6 +73,22 @@ export function useComposerInitialTargetState(input: ComposerInitialTargetStateI
     initialTaskSourceContext
   })
 
+  const defaultProjectSeed = resolveNewWorkspaceDefaultProjectSeed({
+    defaultProject: settings?.newWorkspaceDefaultProject,
+    projects,
+    hasOtherSeed: Boolean(
+      draftRepoId ||
+      draftProjectId ||
+      draftProjectGroupId ||
+      initialRepoId ||
+      initialProjectGroupId ||
+      initialWorkspaceTarget ||
+      initialTaskSourceContext ||
+      repoIdOverride ||
+      seedActiveRepoId
+    )
+  })
+
   const resolvedInitialWorkspaceStatus = useMemo(
     () =>
       initialWorkspaceStatus && isWorkspaceStatusId(initialWorkspaceStatus, workspaceStatuses)
@@ -85,7 +104,7 @@ export function useComposerInitialTargetState(input: ComposerInitialTargetStateI
     draftRepoId,
     initialRepoId,
     activeRepoId: seedActiveRepoId,
-    projectId: initialRunSeed.projectId,
+    projectId: initialRunSeed.projectId ?? defaultProjectSeed.projectId,
     hostId: initialRunSeed.hostId,
     projectHostSetupId: initialRunSeed.projectHostSetupId,
     projectHostSetupHostId: initialWorkspaceTarget ? initialRunSeed.hostId : null,
@@ -125,7 +144,8 @@ export function useComposerInitialTargetState(input: ComposerInitialTargetStateI
         : null
     )
 
-  const initialFolderProjectGroupId = initialProjectGroupId ?? draftProjectGroupId
+  const initialFolderProjectGroupId =
+    initialProjectGroupId ?? draftProjectGroupId ?? defaultProjectSeed.projectGroupId
 
   const initialFolderProjectGroup = findActionableFolderProjectGroup({
     projectGroups,

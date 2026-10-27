@@ -7466,6 +7466,15 @@
           "externalWorktrees": "External worktrees",
           "externalWorktreesDescription": "Choose which worktrees created outside Orca appear by default on this host."
         },
+        "NewWorkspaceDefaultProjectSetting": {
+          "title": "Default Project",
+          "description": "Project or folder the new workspace dialog starts on when you open it outside a project.",
+          "none": "Current or first project",
+          "keywordDefault": "default",
+          "keywordProject": "project",
+          "keywordFolder": "folder",
+          "keywordNewWorkspace": "new workspace"
+        },
         "GhosttyImportModal": {
           "9d3e56ca36": "Apply Changes",
           "f96688b6bc": "Cancel",
